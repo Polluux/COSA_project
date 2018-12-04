@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated COSA_m1 -->
+      <package
+            uri="http://www.example.org/cOSA_m1"
+            class="cOSA_m1.COSA_m1Package"
+            genModel="model/COSA_m1.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated cOSA -->
+      <package
+            uri="http://www.example.org/cOSA"
+            class="cOSA.COSAPackage"
+            genModel="model/cOSA.genmodel"/>
+   </extension>
+
+</plugin>

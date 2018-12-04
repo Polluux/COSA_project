@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cOSA_m1" nsURI="http://www.example.org/cOSA_m1" nsPrefix="cOSA_m1">
+  <eClassifiers xsi:type="ecore:EClass" name="Client" eSuperTypes="cOSA.ecore#//Composant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responseportrpc" lowerBound="1"
+        eType="#//ResponsePortRPC" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requestportrpc" lowerBound="1"
+        eType="#//RequestPortRPC" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configoutput" lowerBound="1"
+        eType="#//ConfigOutput" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configinput" lowerBound="1"
+        eType="#//ConfigInput" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ResponsePortRPC" eSuperTypes="cOSA.ecore#//RequiredPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RequestPortRPC" eSuperTypes="cOSA.ecore#//ProvidedPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CSConf" eSuperTypes="cOSA.ecore#//Configuration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clients" lowerBound="1"
+        upperBound="-1" eType="#//Client" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="csqueryports" lowerBound="1"
+        upperBound="-1" eType="#//CSQueryPorts" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="csresponseports" lowerBound="1"
+        upperBound="-1" eType="#//CSResponsePorts" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rpcs" lowerBound="1" upperBound="-1"
+        eType="#//RPC" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientrpcattachment" lowerBound="1"
+        upperBound="-1" eType="#//ClientRpcAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rpcclientattachment" lowerBound="1"
+        upperBound="-1" eType="#//RpcClientAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputbindings" lowerBound="1"
+        upperBound="-1" eType="#//OutputBindings" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputbindings" lowerBound="1"
+        upperBound="-1" eType="#//InputBindings" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverrpcattachment" lowerBound="1"
+        upperBound="-1" eType="#//ServerRpcAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rpcserverattachment" lowerBound="1"
+        upperBound="-1" eType="#//RpcServerAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="server" lowerBound="1"
+        eType="#//Server" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CSQueryPorts" eSuperTypes="cOSA.ecore#//RequiredPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CSResponsePorts" eSuperTypes="cOSA.ecore#//ProvidedPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RPC" eSuperTypes="cOSA.ecore#//Connecteur">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientoutrole" lowerBound="1"
+        eType="#//ClientOutRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientinrole" lowerBound="1"
+        eType="#//ClientInRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverinrole" lowerBound="1"
+        eType="#//ServerInRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serveuroutrole" lowerBound="1"
+        eType="#//ServeurOutRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rpcglue" lowerBound="1"
+        eType="#//RpcGlue" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClientOutRole" eSuperTypes="cOSA.ecore#//RequiredRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClientInRole" eSuperTypes="cOSA.ecore#//ProvidedRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServerInRole" eSuperTypes="cOSA.ecore#//ProvidedRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServeurOutRole" eSuperTypes="cOSA.ecore#//RequiredRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClientRpcAttachment" eSuperTypes="cOSA.ecore#//AComposantConnecteur">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//RequestPortRPC"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//ClientOutRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RpcClientAttachment" eSuperTypes="cOSA.ecore#//AConnecteurComposant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//ResponsePortRPC"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ClientInRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigInput" eSuperTypes="cOSA.ecore#//RequiredPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigOutput" eSuperTypes="cOSA.ecore#//ProvidedPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InputBindings" eSuperTypes="cOSA.ecore#//RequiredBinding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configinput" lowerBound="1"
+        eType="#//CSQueryPorts"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientinput" lowerBound="1"
+        eType="#//ConfigInput"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputBindings" eSuperTypes="cOSA.ecore#//ProvidedBinding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientoutput" lowerBound="1"
+        eType="#//ConfigOutput"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configoutput" lowerBound="1"
+        eType="#//CSResponsePorts"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RpcGlue" eSuperTypes="cOSA.ecore#//Glue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientout" lowerBound="1"
+        eType="#//ClientOutRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientin" lowerBound="1"
+        eType="#//ClientInRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverin" lowerBound="1"
+        eType="#//ServerInRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serveurout" lowerBound="1"
+        eType="#//ServeurOutRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RpcServerAttachment" eSuperTypes="cOSA.ecore#//AConnecteurComposant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ServerInRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//ServerInput"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServerRpcAttachment" eSuperTypes="cOSA.ecore#//AComposantConnecteur">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//ServeurOutRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ServerOuput"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Server" eSuperTypes="cOSA.ecore#//Configuration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverinput" lowerBound="1"
+        eType="#//ServerInput" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverouput" lowerBound="1"
+        eType="#//ServerOuput" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputbinding" lowerBound="1"
+        eType="#//OutputBinding" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputbinding" lowerBound="1"
+        eType="#//InputBinding" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionmanager" lowerBound="1"
+        eType="#//ConnectionManager" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectordatabaseconnectionattachment"
+        lowerBound="1" eType="#//ConnectorDatabaseConnectionAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionconnectordatabaseattachment"
+        lowerBound="1" eType="#//ConnectionConnectorDatabaseAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiondatabaseconnector"
+        lowerBound="1" eType="#//ConnectionDatabaseConnector" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databaseconnectorconnectionattachment"
+        lowerBound="1" eType="#//DatabaseConnectorConnectionAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectorconnectiondatabaseattachment"
+        lowerBound="1" eType="#//ConnectorConnectionDatabaseAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="database" lowerBound="1"
+        eType="#//DataBase" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectorsecuritydatabaseattachment"
+        lowerBound="1" eType="#//ConnectorSecurityDatabaseAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databaseconnectorsecurityattachment"
+        lowerBound="1" eType="#//DatabaseConnectorSecurityAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databasesecurityconnector"
+        lowerBound="1" eType="#//DatabaseSecurityConnector" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectordatabasesecurityattachment"
+        lowerBound="1" eType="#//ConnectorDatabaseSecurityAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityconnectordatabaseattachment"
+        lowerBound="1" eType="#//SecurityConnectorDatabaseAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securitymanager" lowerBound="1"
+        eType="#//SecurityManager" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityconnectorconnectionattachment"
+        lowerBound="1" eType="#//SecurityConnectorConnectionAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectorconnectionsecurityattachment"
+        lowerBound="1" eType="#//ConnectorConnectionSecurityAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionsecurityconnector"
+        lowerBound="1" eType="#//ConnectionSecurityConnector" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectorsecurityconnectionattachment"
+        lowerBound="1" eType="#//ConnectorSecurityConnectionAttachment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionconnectorsecurityattachment"
+        lowerBound="1" eType="#//ConnectionConnectorSecurityAttachment" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServerInput" eSuperTypes="cOSA.ecore#//RequiredPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServerOuput" eSuperTypes="cOSA.ecore#//ProvidedPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionManager" eSuperTypes="cOSA.ecore#//Composant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverconfiginput" lowerBound="1"
+        eType="#//ServerConfigInput" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverconfigoutput" lowerBound="1"
+        eType="#//ServerConfigOutput" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionoutputtosecurityport"
+        lowerBound="1" eType="#//ConnectionOutputToSecurityPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectioninputfromsecurityport"
+        lowerBound="1" eType="#//ConnectionInputFromSecurityPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectioninputfromdatabaseport"
+        lowerBound="1" eType="#//ConnectionInputFromDataBasePort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionouputtodatabaseport"
+        lowerBound="1" eType="#//ConnectionOuputToDataBasePort" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityManager" eSuperTypes="cOSA.ecore#//Composant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityinputfromconnectionport"
+        lowerBound="1" eType="#//SecurityInputFromConnectionPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityouputtoconnectionport"
+        lowerBound="1" eType="#//SecurityOuputToConnectionPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityoutputtodatabaseport"
+        lowerBound="1" eType="#//SecurityOutputToDatabasePort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityinputfromdatabaseport"
+        lowerBound="1" eType="#//SecurityInputFromDatabasePort" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataBase" eSuperTypes="cOSA.ecore#//Composant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databaseinputfromconnectionport"
+        lowerBound="1" eType="#//DatabaseInputFromConnectionPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databaseoutputtoconnectionport"
+        lowerBound="1" eType="#//DatabaseOutputToConnectionPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databaseoutputtosecurityport"
+        lowerBound="1" eType="#//DatabaseOutputToSecurityPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databaseinputfromsecurityport"
+        lowerBound="1" eType="#//DatabaseInputFromSecurityPort" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServerConfigInput" eSuperTypes="cOSA.ecore#//RequiredPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServerConfigOutput" eSuperTypes="cOSA.ecore#//ProvidedPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InputBinding" eSuperTypes="cOSA.ecore#//RequiredBinding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverinput" lowerBound="1"
+        eType="#//ServerInput"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverconfiginput" lowerBound="1"
+        eType="#//ServerConfigInput"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputBinding" eSuperTypes="cOSA.ecore#//ProvidedBinding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverconfigoutput" lowerBound="1"
+        eType="#//ServerConfigOutput"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverouput" lowerBound="1"
+        eType="#//ServerOuput"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionOutputToSecurityPort" eSuperTypes="cOSA.ecore#//ProvidedPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionInputFromSecurityPort" eSuperTypes="cOSA.ecore#//RequiredPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionOuputToDataBasePort" eSuperTypes="cOSA.ecore#//ProvidedPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionInputFromDataBasePort" eSuperTypes="cOSA.ecore#//RequiredPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionDatabaseConnector" eSuperTypes="cOSA.ecore#//Connecteur">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiondbinrole" lowerBound="1"
+        eType="#//ConnectionDBInRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dbconnectionoutrole" lowerBound="1"
+        eType="#//DBConnectionOutRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiondboutrole" lowerBound="1"
+        eType="#//ConnectionDBOutRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dbconnectioninrole" lowerBound="1"
+        eType="#//DBConnectionInRole" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DBConnectionOutRole" eSuperTypes="cOSA.ecore#//ProvidedRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionDBInRole" eSuperTypes="cOSA.ecore#//RequiredRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionConnectorDatabaseAttachment"
+      eSuperTypes="cOSA.ecore#//AComposantConnecteur">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ConnectionOuputToDataBasePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//ConnectionDBInRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorDatabaseConnectionAttachment"
+      eSuperTypes="cOSA.ecore#//AConnecteurComposant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//ConnectionInputFromDataBasePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//DBConnectionOutRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionDBOutRole" eSuperTypes="cOSA.ecore#//ProvidedRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DBConnectionInRole" eSuperTypes="cOSA.ecore#//RequiredRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorConnectionDatabaseAttachment"
+      eSuperTypes="cOSA.ecore#//AConnecteurComposant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ConnectionDBOutRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//DatabaseInputFromConnectionPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseConnectorConnectionAttachment"
+      eSuperTypes="cOSA.ecore#//AComposantConnecteur">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//DBConnectionInRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//DatabaseOutputToConnectionPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseInputFromConnectionPort" eSuperTypes="cOSA.ecore#//RequiredPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseOutputToConnectionPort" eSuperTypes="cOSA.ecore#//ProvidedPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionSecurityConnector" eSuperTypes="cOSA.ecore#//Connecteur">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionsecurityinrole"
+        lowerBound="1" eType="#//ConnectionSecurityInRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityconnectionoutrole"
+        lowerBound="1" eType="#//SecurityConnectionOutRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionsecurityoutrole"
+        lowerBound="1" eType="#//ConnectionSecurityOutRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityconnectioninrole"
+        lowerBound="1" eType="#//SecurityConnectionInRole" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionSecurityInRole" eSuperTypes="cOSA.ecore#//RequiredRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionSecurityOutRole" eSuperTypes="cOSA.ecore#//ProvidedRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityConnectionOutRole" eSuperTypes="cOSA.ecore#//ProvidedRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityConnectionInRole" eSuperTypes="cOSA.ecore#//RequiredRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionConnectorSecurityAttachment"
+      eSuperTypes="cOSA.ecore#//AComposantConnecteur">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ConnectionOutputToSecurityPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//ConnectionSecurityInRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorSecurityConnectionAttachment"
+      eSuperTypes="cOSA.ecore#//AConnecteurComposant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//ConnectionInputFromSecurityPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//SecurityConnectionOutRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityInputFromConnectionPort" eSuperTypes="cOSA.ecore#//RequiredPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityOuputToConnectionPort" eSuperTypes="cOSA.ecore#//ProvidedPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorConnectionSecurityAttachment"
+      eSuperTypes="cOSA.ecore#//AConnecteurComposant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ConnectionSecurityOutRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//SecurityInputFromConnectionPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityConnectorConnectionAttachment"
+      eSuperTypes="cOSA.ecore#//AComposantConnecteur">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//SecurityOuputToConnectionPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//SecurityConnectionInRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseOutputToSecurityPort" eSuperTypes="cOSA.ecore#//ProvidedPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseInputFromSecurityPort" eSuperTypes="cOSA.ecore#//RequiredPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityOutputToDatabasePort" eSuperTypes="cOSA.ecore#//ProvidedPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityInputFromDatabasePort" eSuperTypes="cOSA.ecore#//RequiredPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseSecurityConnector" eSuperTypes="cOSA.ecore#//Connecteur">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="decuritydatabaseoutrole"
+        lowerBound="1" eType="#//DecurityDatabaseOutRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databasesecurityinrole"
+        lowerBound="1" eType="#//DatabaseSecurityInRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securitydatabaseinrole"
+        lowerBound="1" eType="#//SecurityDatabaseInRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databasesecurityoutrole"
+        lowerBound="1" eType="#//DatabaseSecurityOutRole" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseSecurityInRole" eSuperTypes="cOSA.ecore#//RequiredRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DecurityDatabaseOutRole" eSuperTypes="cOSA.ecore#//ProvidedRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityDatabaseInRole" eSuperTypes="cOSA.ecore#//RequiredRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseSecurityOutRole" eSuperTypes="cOSA.ecore#//ProvidedRole"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseConnectorSecurityAttachment"
+      eSuperTypes="cOSA.ecore#//AComposantConnecteur">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//DatabaseOutputToSecurityPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//DatabaseSecurityInRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorSecurityDatabaseAttachment"
+      eSuperTypes="cOSA.ecore#//AConnecteurComposant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//DecurityDatabaseOutRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//DatabaseInputFromSecurityPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityConnectorDatabaseAttachment"
+      eSuperTypes="cOSA.ecore#//AComposantConnecteur">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//SecurityOutputToDatabasePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//SecurityDatabaseInRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorDatabaseSecurityAttachment"
+      eSuperTypes="cOSA.ecore#//AConnecteurComposant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//DatabaseSecurityOutRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//SecurityInputFromDatabasePort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CDConnectorGlue" eSuperTypes="cOSA.ecore#//Glue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionoutput" lowerBound="1"
+        eType="#//ConnectionDBInRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectioninput" lowerBound="1"
+        eType="#//DBConnectionOutRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databaseinput" lowerBound="1"
+        eType="#//ConnectionDBOutRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databaseoutput" lowerBound="1"
+        eType="#//DBConnectionInRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CSCOnnectorGlue" eSuperTypes="cOSA.ecore#//Glue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionoutput" lowerBound="1"
+        eType="#//ConnectionSecurityInRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectioninput" lowerBound="1"
+        eType="#//SecurityConnectionOutRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityinput" lowerBound="1"
+        eType="#//ConnectionSecurityOutRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityoutput" lowerBound="1"
+        eType="#//SecurityConnectionInRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSConnectorGlue" eSuperTypes="cOSA.ecore#//Glue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databaseinput" lowerBound="1"
+        eType="#//DecurityDatabaseOutRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databaseoutput" lowerBound="1"
+        eType="#//DatabaseSecurityInRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityinput" lowerBound="1"
+        eType="#//DatabaseSecurityOutRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityoutput" lowerBound="1"
+        eType="#//SecurityDatabaseInRole"/>
+  </eClassifiers>
+</ecore:EPackage>

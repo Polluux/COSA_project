@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description">
+  <viewpoint:DAnalysis xmi:id="_mgocQPF9EeinsLaH4BMuPQ" selectedViews="_mhtaUPF9EeinsLaH4BMuPQ" version="12.1.0.201708031200">
+    <semanticResources>cOSA_m1.ecore</semanticResources>
+    <semanticResources>cOSA_m1.genmodel</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" xmi:id="_mhtaUPF9EeinsLaH4BMuPQ">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_miju4PF9EeinsLaH4BMuPQ" name="cOSA_m1" repPath="#_miUeUPF9EeinsLaH4BMuPQ">
+        <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
+        <target xmi:type="ecore:EPackage" href="cOSA_m1.ecore#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram xmi:id="_mih5sPF9EeinsLaH4BMuPQ" name="cOSA_m1" uid="_miUeUPF9EeinsLaH4BMuPQ">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_mih5sfF9EeinsLaH4BMuPQ" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_mih5svF9EeinsLaH4BMuPQ"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_mionYPF9EeinsLaH4BMuPQ" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_mionYfF9EeinsLaH4BMuPQ" type="Sirius" element="_mih5sPF9EeinsLaH4BMuPQ" measurementUnit="Pixel">
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_mionYvF9EeinsLaH4BMuPQ"/>
+      </data>
+    </ownedAnnotationEntries>
+    <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_mih5tPF9EeinsLaH4BMuPQ"/>
+    <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer"/>
+    <activatedLayers xmi:type="description_1:AdditionalLayer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']"/>
+    <activatedLayers xmi:type="description_1:AdditionalLayer" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Validation']"/>
+    <target xmi:type="ecore:EPackage" href="cOSA_m1.ecore#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>

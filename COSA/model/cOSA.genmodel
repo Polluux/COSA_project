@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/COSA/src-gen" creationIcons="false" editDirectory="/COSA.edit/src-gen"
+    editorDirectory="/COSA.editor/src-gen" modelPluginID="COSA" modelName="COSA" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0"
+    copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>cOSA.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="COSA" disposableProviderFactory="true" ecorePackage="cOSA.ecore#/">
+    <genClasses ecoreClass="cOSA.ecore#//Configuration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cOSA.ecore#//Configuration/element"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cOSA.ecore#//Configuration/iconfiguration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cOSA.ecore#//Configuration/biding"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cOSA.ecore#//Element"/>
+    <genClasses ecoreClass="cOSA.ecore#//Connecteur">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cOSA.ecore#//Connecteur/interfaceconnect"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cOSA.ecore#//Connecteur/glue"/>
+    </genClasses>
+    <genClasses ecoreClass="cOSA.ecore#//Composant">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cOSA.ecore#//Composant/interfacecompo"/>
+    </genClasses>
+    <genClasses ecoreClass="cOSA.ecore#//Attachement"/>
+    <genClasses image="false" ecoreClass="cOSA.ecore#//InterfaceConfig"/>
+    <genClasses image="false" ecoreClass="cOSA.ecore#//InterfaceCompo"/>
+    <genClasses image="false" ecoreClass="cOSA.ecore#//InterfaceConnect"/>
+    <genClasses ecoreClass="cOSA.ecore#//Glue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cOSA.ecore#//Glue/providedrole"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cOSA.ecore#//Glue/requiredrole"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cOSA.ecore#//Role"/>
+    <genClasses ecoreClass="cOSA.ecore#//ProvidedRole"/>
+    <genClasses ecoreClass="cOSA.ecore#//RequiredRole"/>
+    <genClasses image="false" ecoreClass="cOSA.ecore#//Port"/>
+    <genClasses image="false" ecoreClass="cOSA.ecore#//Service"/>
+    <genClasses ecoreClass="cOSA.ecore#//RequiredPort"/>
+    <genClasses ecoreClass="cOSA.ecore#//ProvidedPort"/>
+    <genClasses ecoreClass="cOSA.ecore#//RequiredService"/>
+    <genClasses ecoreClass="cOSA.ecore#//ProvidedService"/>
+    <genClasses ecoreClass="cOSA.ecore#//AComposantConnecteur">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cOSA.ecore#//AComposantConnecteur/providedport"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cOSA.ecore#//AComposantConnecteur/providedservice"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cOSA.ecore#//AComposantConnecteur/requiredrole"/>
+    </genClasses>
+    <genClasses ecoreClass="cOSA.ecore#//AConnecteurComposant">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cOSA.ecore#//AConnecteurComposant/requiredport"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cOSA.ecore#//AConnecteurComposant/requiredservice"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cOSA.ecore#//AConnecteurComposant/providedrole"/>
+    </genClasses>
+    <genClasses ecoreClass="cOSA.ecore#//ProvidedBinding">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cOSA.ecore#//ProvidedBinding/componentPort"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cOSA.ecore#//ProvidedBinding/configPort"/>
+    </genClasses>
+    <genClasses ecoreClass="cOSA.ecore#//RequiredBinding">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cOSA.ecore#//RequiredBinding/configPort"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cOSA.ecore#//RequiredBinding/componentPort"/>
+    </genClasses>
+    <genClasses ecoreClass="cOSA.ecore#//Binding"/>
+  </genPackages>
+</genmodel:GenModel>
