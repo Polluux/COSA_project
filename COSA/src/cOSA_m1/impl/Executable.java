@@ -2,8 +2,24 @@ package cOSA_m1.impl;
 
 import cOSA_m1.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+
+import cOSA.Glue;
 
 public class Executable {
 
@@ -105,6 +121,87 @@ public class Executable {
 		in2.init();
 		server.eSet(COSA_m1Package.SERVER__INPUTBINDING,in2);	
 		
+
+		ConnectionSecurityConnectorImpl conConSec = new ConnectionSecurityConnectorImpl();
+		conConSec.setConnectionsecurityinrole(new ConnectionSecurityInRoleImpl());
+		conConSec.setConnectionsecurityoutrole(new ConnectionSecurityOutRoleImpl());
+		conConSec.setSecurityconnectioninrole(new SecurityConnectionInRoleImpl());
+		conConSec.setSecurityconnectionoutrole(new SecurityConnectionOutRoleImpl());
+		conConSec.setCSCOnnectorGlue(new CSCOnnectorGlueImpl());
+		conConSec.getCSCOnnectorGlue().setConnectionoutput(conConSec.getConnectionsecurityinrole());
+		conConSec.getCSCOnnectorGlue().setConnectioninput(conConSec.getSecurityconnectionoutrole());
+		conConSec.getCSCOnnectorGlue().setSecurityoutput(conConSec.getSecurityconnectioninrole());
+		conConSec.getCSCOnnectorGlue().setSecurityinput(conConSec.getConnectionsecurityoutrole());
+		conConSec.init();
+		server.eSet(COSA_m1Package.SERVER__CONNECTIONSECURITYCONNECTOR,conConSec);
+		
+		ConnectionConnectorSecurityAttachmentImpl ccsa = new ConnectionConnectorSecurityAttachmentImpl();
+		ccsa.setFrom(connectionManager.getConnectionoutputtosecurityport());
+		ccsa.setTo(conConSec.getConnectionsecurityinrole());
+		ccsa.init();
+		server.eSet(COSA_m1Package.SERVER__CONNECTIONCONNECTORSECURITYATTACHMENT, ccsa);
+		
+		ConnectorSecurityConnectionAttachmentImpl csca = new ConnectorSecurityConnectionAttachmentImpl();
+		csca.setFrom(conConSec.getSecurityconnectionoutrole());
+		csca.setTo(connectionManager.getConnectioninputfromsecurityport());
+		csca.init();
+		server.eSet(COSA_m1Package.SERVER__CONNECTORSECURITYCONNECTIONATTACHMENT, csca);
+		
+		SecurityManagerImpl securityManager = new SecurityManagerImpl();
+		securityManager.setSecurityinputfromconnectionport(new SecurityInputFromConnectionPortImpl());
+		securityManager.setSecurityouputtoconnectionport(new SecurityOuputToConnectionPortImpl());
+		securityManager.setSecurityoutputtodatabaseport(new SecurityOutputToDatabasePortImpl());
+		securityManager.setSecurityinputfromdatabaseport(new SecurityInputFromDatabasePortImpl());
+		securityManager.init();
+		server.eSet(COSA_m1Package.SERVER__SECURITYMANAGER, securityManager);
+		
+		ConnectorConnectionSecurityAttachmentImpl ccsa2 = new ConnectorConnectionSecurityAttachmentImpl();
+		ccsa2.setFrom(conConSec.getConnectionsecurityoutrole());
+		ccsa2.setTo(securityManager.getSecurityinputfromconnectionport());
+		ccsa2.init();
+		server.eSet(COSA_m1Package.SERVER__CONNECTORCONNECTIONSECURITYATTACHMENT, ccsa2);
+		
+		SecurityConnectorConnectionAttachmentImpl scca = new SecurityConnectorConnectionAttachmentImpl();
+		scca.setFrom(securityManager.getSecurityouputtoconnectionport());
+		scca.setTo(conConSec.getSecurityconnectioninrole());
+		scca.init();
+		server.eSet(COSA_m1Package.SERVER__SECURITYCONNECTORCONNECTIONATTACHMENT, scca);
+		
+		DatabaseSecurityConnectorImpl conDbSec = new DatabaseSecurityConnectorImpl();
+		conDbSec.setSecuritydatabaseinrole(new SecurityDatabaseInRoleImpl());
+		conDbSec.setDecuritydatabaseoutrole(new DecurityDatabaseOutRoleImpl());//Oui... Oui, j'ai mis un D à la place d'un S .. oui il y a plein de typos dans ce code généré
+		conDbSec.setDatabasesecurityinrole(new DatabaseSecurityInRoleImpl());
+		conDbSec.setDatabasesecurityoutrole(new DatabaseSecurityOutRoleImpl());
+		conDbSec.setDSConnectorGlue(new DSConnectorGlueImpl());
+		conDbSec.getDSConnectorGlue().setSecurityoutput(conDbSec.getSecuritydatabaseinrole());
+		conDbSec.getDSConnectorGlue().setSecurityinput(conDbSec.getDatabasesecurityoutrole());
+		conDbSec.getDSConnectorGlue().setDatabaseoutput(conDbSec.getDatabasesecurityinrole());
+		conDbSec.getDSConnectorGlue().setDatabaseinput(conDbSec.getDecuritydatabaseoutrole());
+		conDbSec.init();
+		server.eSet(COSA_m1Package.SERVER__DATABASESECURITYCONNECTOR, conDbSec);
+		
+		SecurityConnectorDatabaseAttachmentImpl scda = new SecurityConnectorDatabaseAttachmentImpl();
+		scda.setFrom(securityManager.getSecurityoutputtodatabaseport());
+		scda.setTo(conDbSec.getSecuritydatabaseinrole());
+		scda.init();
+		server.eSet(COSA_m1Package.SERVER__SECURITYCONNECTORDATABASEATTACHMENT, scda);
+		
+		ConnectorDatabaseSecurityAttachmentImpl cdsa = new ConnectorDatabaseSecurityAttachmentImpl();
+		cdsa.setFrom(conDbSec.getDatabasesecurityoutrole());
+		cdsa.setTo(securityManager.getSecurityinputfromdatabaseport());
+		cdsa.init();
+		server.eSet(COSA_m1Package.SERVER__CONNECTORDATABASESECURITYATTACHMENT, cdsa);
+		
+		DataBaseImpl database = new DataBaseImpl();
+		database.setDatabaseinputfromconnectionport(new DatabaseInputFromConnectionPortImpl());
+		database.setDatabaseoutputtosecurityport(new DatabaseOutputToSecurityPortImpl());
+		database.setDatabaseinputfromsecurityport(new DatabaseInputFromSecurityPortImpl());
+		database.setDatabaseoutputtoconnectionport(new DatabaseOutputToConnectionPortImpl());
+		database.init();
+		server.eSet(COSA_m1Package.SERVER__DATABASE, database);
+		
+		
+		
 		
 
 		clientServerConfiguration.eSet(COSA_m1Package.CS_CONF__SERVER,server);
@@ -124,6 +221,12 @@ public class Executable {
 		System.out.println("La valeur d'entrée de mon ConnectionManager est : "+server.getConnectionmanager().getServerconfiginput().getValue());
 		System.out.println("La valeur de sortie de mon ConnectionManager vers DataBaseManager est : "+server.getConnectionmanager().getConnectionouputtodatabaseport().getValue());
 		System.out.println("La valeur de sortie de mon ConnectionManager vers SecurityManager est : "+server.getConnectionmanager().getConnectionoutputtosecurityport().getValue());
+		System.out.println("La valeur d'entrée de mon Connection to Security connector est : "+server.getConnectionsecurityconnector().getConnectionsecurityinrole().getValue());
+		System.out.println("La valeur de sortie de mon Connection to Security connector est : "+server.getConnectionsecurityconnector().getConnectionsecurityoutrole().getValue());
+		System.out.println("La valeur d'entrée de mon Security Manager est : "+securityManager.getSecurityinputfromconnectionport().getValue());
+		System.out.println("La valeur de sortie de mon Security Manager est : "+securityManager.getSecurityoutputtodatabaseport().getValue());
+		System.out.println("La valeur d'entrée de mon Security to Database Connector est : "+server.getDatabasesecurityconnector().getSecuritydatabaseinrole().getValue());
+		System.out.println("La valeur de sortie de mon Security to Database Connector est : "+server.getDatabasesecurityconnector().getDecuritydatabaseoutrole().getValue());
 		
 		
 		

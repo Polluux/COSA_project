@@ -69,6 +69,12 @@ public class ConnectorSecurityConnectionAttachmentImpl extends AConnecteurCompos
 	protected EClass eStaticClass() {
 		return COSA_m1Package.Literals.CONNECTOR_SECURITY_CONNECTION_ATTACHMENT;
 	}
+	
+	public void init() {
+		if(from != null && to != null) {
+			from.startBeingObservedBy(to);
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -84,6 +84,16 @@ public class DSConnectorGlueImpl extends GlueImpl implements DSConnectorGlue {
 		super();
 	}
 
+	@Override
+	public String traitementInOut(String s) {
+		return s;
+	}
+	
+	@Override
+	public String traitementOutIn(String s) {
+		return s;
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

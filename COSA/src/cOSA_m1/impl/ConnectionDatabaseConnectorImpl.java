@@ -3,8 +3,9 @@
 package cOSA_m1.impl;
 
 import cOSA.impl.ConnecteurImpl;
-
+import cOSA_m1.CDConnectorGlue;
 import cOSA_m1.COSA_m1Package;
+import cOSA_m1.CSCOnnectorGlue;
 import cOSA_m1.ConnectionDBInRole;
 import cOSA_m1.ConnectionDBOutRole;
 import cOSA_m1.ConnectionDatabaseConnector;
@@ -75,6 +76,16 @@ public class ConnectionDatabaseConnectorImpl extends ConnecteurImpl implements C
 	 * @ordered
 	 */
 	protected DBConnectionInRole dbconnectioninrole;
+	
+	protected CDConnectorGlue cdConnectorGlue;
+	
+	public CDConnectorGlue getCDCnnectorGlue() {
+		return cdConnectorGlue;
+	}
+	
+	public void setCDConnectorGlue(CDConnectorGlue newGlue) {
+		cdConnectorGlue = newGlue;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

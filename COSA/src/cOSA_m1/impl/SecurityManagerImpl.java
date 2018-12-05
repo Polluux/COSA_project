@@ -10,6 +10,9 @@ import cOSA_m1.SecurityInputFromDatabasePort;
 import cOSA_m1.SecurityOuputToConnectionPort;
 import cOSA_m1.SecurityOutputToDatabasePort;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -82,6 +85,28 @@ public class SecurityManagerImpl extends ComposantImpl implements cOSA_m1.Securi
 	 */
 	protected SecurityManagerImpl() {
 		super();
+		interm = new IntermediateObserver();
+	}
+	
+	public void init() {
+		if(securityinputfromconnectionport != null && securityouputtoconnectionport != null && securityoutputtodatabaseport != null && securityinputfromdatabaseport != null) {
+			securityinputfromconnectionport.startBeingObservedBy(interm);
+			interm.addObserver(securityoutputtodatabaseport);
+			securityinputfromdatabaseport.startBeingObservedBy(securityouputtoconnectionport);
+		}
+	}
+	
+	IntermediateObserver interm;
+	
+	class IntermediateObserver extends Observable implements Observer{
+		@Override
+		public void update(Observable o, Object arg) {
+			//If the user is authentified, follow the query to the database
+			//Else, return an error
+			//Here we don't handle the authentification, so just follow to database
+			setChanged();
+			notifyObservers(arg);
+		}
 	}
 
 	/**

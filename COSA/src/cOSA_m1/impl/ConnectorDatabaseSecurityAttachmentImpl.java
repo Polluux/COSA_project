@@ -59,6 +59,12 @@ public class ConnectorDatabaseSecurityAttachmentImpl extends AConnecteurComposan
 	protected ConnectorDatabaseSecurityAttachmentImpl() {
 		super();
 	}
+	
+	public void init() {
+		if(from != null && to != null) {
+			from.startBeingObservedBy(to);
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

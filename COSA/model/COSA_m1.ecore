@@ -204,6 +204,8 @@
         eType="#//ConnectionDBOutRole" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dbconnectioninrole" lowerBound="1"
         eType="#//DBConnectionInRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cdconnectorglue" lowerBound="1"
+        eType="#//CDConnectorGlue" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DBConnectionOutRole" eSuperTypes="cOSA.ecore#//ProvidedRole"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionDBInRole" eSuperTypes="cOSA.ecore#//RequiredRole"/>
@@ -240,6 +242,8 @@
         lowerBound="1" eType="#//ConnectionSecurityOutRole" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="securityconnectioninrole"
         lowerBound="1" eType="#//SecurityConnectionInRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="csconnectorglue" lowerBound="1"
+        eType="#//CSCOnnectorGlue" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionSecurityInRole" eSuperTypes="cOSA.ecore#//RequiredRole"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionSecurityOutRole" eSuperTypes="cOSA.ecore#//ProvidedRole"/>
@@ -280,6 +284,8 @@
         lowerBound="1" eType="#//SecurityDatabaseInRole" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="databasesecurityoutrole"
         lowerBound="1" eType="#//DatabaseSecurityOutRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dsconnectorglue" lowerBound="1"
+        eType="#//DSConnectorGlue" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DatabaseSecurityInRole" eSuperTypes="cOSA.ecore#//RequiredRole"/>
   <eClassifiers xsi:type="ecore:EClass" name="DecurityDatabaseOutRole" eSuperTypes="cOSA.ecore#//ProvidedRole"/>

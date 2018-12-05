@@ -83,6 +83,16 @@ public class CDConnectorGlueImpl extends GlueImpl implements CDConnectorGlue {
 	protected CDConnectorGlueImpl() {
 		super();
 	}
+	
+	@Override
+	public String traitementInOut(String s) {
+		return s;
+	}
+	
+	@Override
+	public String traitementOutIn(String s) {
+		return s;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

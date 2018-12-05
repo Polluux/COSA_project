@@ -3,8 +3,9 @@
 package cOSA_m1.impl;
 
 import cOSA.impl.ConnecteurImpl;
-
+import cOSA_m1.CDConnectorGlue;
 import cOSA_m1.COSA_m1Package;
+import cOSA_m1.DSConnectorGlue;
 import cOSA_m1.DatabaseSecurityConnector;
 import cOSA_m1.DatabaseSecurityInRole;
 import cOSA_m1.DatabaseSecurityOutRole;
@@ -75,6 +76,16 @@ public class DatabaseSecurityConnectorImpl extends ConnecteurImpl implements Dat
 	 * @ordered
 	 */
 	protected DatabaseSecurityOutRole databasesecurityoutrole;
+	
+	protected DSConnectorGlue dsConnectorGlue;
+	
+	public DSConnectorGlue getDSConnectorGlue() {
+		return dsConnectorGlue;
+	}
+	
+	public void setDSConnectorGlue(DSConnectorGlue newGlue) {
+		dsConnectorGlue = newGlue;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,6 +94,16 @@ public class DatabaseSecurityConnectorImpl extends ConnecteurImpl implements Dat
 	 */
 	protected DatabaseSecurityConnectorImpl() {
 		super();
+	}
+	
+	@Override
+	public void init() {
+		if(securitydatabaseinrole != null && decuritydatabaseoutrole != null) {
+			securitydatabaseinrole.startBeingObservedBy(decuritydatabaseoutrole, dsConnectorGlue, 0);
+		}
+		if(databasesecurityinrole != null && databasesecurityoutrole != null) {
+			databasesecurityinrole.startBeingObservedBy(databasesecurityoutrole, dsConnectorGlue, 1);
+		}
 	}
 
 	/**

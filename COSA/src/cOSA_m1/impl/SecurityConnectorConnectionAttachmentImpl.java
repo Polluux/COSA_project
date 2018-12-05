@@ -59,6 +59,12 @@ public class SecurityConnectorConnectionAttachmentImpl extends AComposantConnect
 	protected SecurityConnectorConnectionAttachmentImpl() {
 		super();
 	}
+	
+	public void init() {
+		if(from != null && to != null) {
+			from.startBeingObservedBy(to);
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

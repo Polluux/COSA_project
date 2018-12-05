@@ -136,6 +136,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference COSA_m1.ecore#//ConnectionDatabaseConnector/dbconnectionoutrole"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference COSA_m1.ecore#//ConnectionDatabaseConnector/connectiondboutrole"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference COSA_m1.ecore#//ConnectionDatabaseConnector/dbconnectioninrole"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference COSA_m1.ecore#//ConnectionDatabaseConnector/cdconnectorglue"/>
     </genClasses>
     <genClasses ecoreClass="COSA_m1.ecore#//DBConnectionOutRole"/>
     <genClasses ecoreClass="COSA_m1.ecore#//ConnectionDBInRole"/>
@@ -164,6 +165,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference COSA_m1.ecore#//ConnectionSecurityConnector/securityconnectionoutrole"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference COSA_m1.ecore#//ConnectionSecurityConnector/connectionsecurityoutrole"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference COSA_m1.ecore#//ConnectionSecurityConnector/securityconnectioninrole"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference COSA_m1.ecore#//ConnectionSecurityConnector/csconnectorglue"/>
     </genClasses>
     <genClasses ecoreClass="COSA_m1.ecore#//ConnectionSecurityInRole"/>
     <genClasses ecoreClass="COSA_m1.ecore#//ConnectionSecurityOutRole"/>
@@ -196,6 +198,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference COSA_m1.ecore#//DatabaseSecurityConnector/databasesecurityinrole"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference COSA_m1.ecore#//DatabaseSecurityConnector/securitydatabaseinrole"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference COSA_m1.ecore#//DatabaseSecurityConnector/databasesecurityoutrole"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference COSA_m1.ecore#//DatabaseSecurityConnector/dsconnectorglue"/>
     </genClasses>
     <genClasses ecoreClass="COSA_m1.ecore#//DatabaseSecurityInRole"/>
     <genClasses ecoreClass="COSA_m1.ecore#//DecurityDatabaseOutRole"/>

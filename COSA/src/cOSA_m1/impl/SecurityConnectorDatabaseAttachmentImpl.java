@@ -69,6 +69,12 @@ public class SecurityConnectorDatabaseAttachmentImpl extends AComposantConnecteu
 	protected EClass eStaticClass() {
 		return COSA_m1Package.Literals.SECURITY_CONNECTOR_DATABASE_ATTACHMENT;
 	}
+	
+	public void init() {
+		if(from != null && to != null) {
+			from.startBeingObservedBy(to);
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

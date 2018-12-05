@@ -5,9 +5,11 @@ package cOSA_m1.impl;
 import cOSA.impl.ConnecteurImpl;
 
 import cOSA_m1.COSA_m1Package;
+import cOSA_m1.CSCOnnectorGlue;
 import cOSA_m1.ConnectionSecurityConnector;
 import cOSA_m1.ConnectionSecurityInRole;
 import cOSA_m1.ConnectionSecurityOutRole;
+import cOSA_m1.RpcGlue;
 import cOSA_m1.SecurityConnectionInRole;
 import cOSA_m1.SecurityConnectionOutRole;
 
@@ -75,6 +77,17 @@ public class ConnectionSecurityConnectorImpl extends ConnecteurImpl implements C
 	 * @ordered
 	 */
 	protected SecurityConnectionInRole securityconnectioninrole;
+	
+
+	protected CSCOnnectorGlue csConnectorGlue;
+	
+	public CSCOnnectorGlue getCSCOnnectorGlue() {
+		return csConnectorGlue;
+	}
+	
+	public void setCSCOnnectorGlue(CSCOnnectorGlue newGlue) {
+		csConnectorGlue = newGlue;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,6 +96,16 @@ public class ConnectionSecurityConnectorImpl extends ConnecteurImpl implements C
 	 */
 	protected ConnectionSecurityConnectorImpl() {
 		super();
+	}
+	
+	@Override
+	public void init() {
+		if(connectionsecurityinrole != null && connectionsecurityoutrole != null) {
+			connectionsecurityinrole.startBeingObservedBy(connectionsecurityoutrole, csConnectorGlue, 0);
+		}
+		if(securityconnectioninrole != null && securityconnectionoutrole != null) {
+			securityconnectioninrole.startBeingObservedBy(securityconnectionoutrole, csConnectorGlue, 1);
+		}
 	}
 
 	/**

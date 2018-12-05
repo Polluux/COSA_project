@@ -83,6 +83,16 @@ public class CSCOnnectorGlueImpl extends GlueImpl implements CSCOnnectorGlue {
 	protected CSCOnnectorGlueImpl() {
 		super();
 	}
+	
+	@Override
+	public String traitementInOut(String s) {
+		return s;
+	}
+	
+	@Override
+	public String traitementOutIn(String s) {
+		return s;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
