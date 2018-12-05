@@ -28,6 +28,9 @@ import cOSA_m1.Server;
 import cOSA_m1.ServerInput;
 import cOSA_m1.ServerOuput;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -299,6 +302,7 @@ public class ServerImpl extends ConfigurationImpl implements Server {
 	protected ServerImpl() {
 		super();
 	}
+	
 
 	/**
 	 * <!-- begin-user-doc -->

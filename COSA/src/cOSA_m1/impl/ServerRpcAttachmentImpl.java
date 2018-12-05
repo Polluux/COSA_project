@@ -59,6 +59,12 @@ public class ServerRpcAttachmentImpl extends AComposantConnecteurImpl implements
 	protected ServerRpcAttachmentImpl() {
 		super();
 	}
+	
+	public void init() {
+		if(from != null && to != null) {
+			from.startBeingObservedBy(to);
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

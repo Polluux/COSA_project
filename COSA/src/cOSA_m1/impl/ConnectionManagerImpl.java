@@ -13,6 +13,9 @@ import cOSA_m1.ConnectionOutputToSecurityPort;
 import cOSA_m1.ServerConfigInput;
 import cOSA_m1.ServerConfigOutput;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -107,7 +110,67 @@ public class ConnectionManagerImpl extends ComposantImpl implements ConnectionMa
 	 */
 	protected ConnectionManagerImpl() {
 		super();
+		manager = new BigObserv();
 	}
+	
+	public void init() {
+		if(serverconfiginput != null && serverconfigoutput != null && connectionouputtodatabaseport != null && connectioninputfromdatabaseport != null && connectionoutputtosecurityport != null && connectioninputfromsecurityport != null) {
+			serverconfiginput.startBeingObservedBy(manager);
+			manager.getDB().addObserver(connectionouputtodatabaseport);
+			manager.getSecu().addObserver(connectionoutputtosecurityport);
+			connectioninputfromdatabaseport.startBeingObservedBy(serverconfigoutput);
+			connectioninputfromsecurityport.startBeingObservedBy(serverconfigoutput);
+		}
+	}
+	
+	BigObserv manager;
+	
+	
+	private class BigObserv implements Observer{
+		MiniObserv portToDB;
+		MiniObserv portToSecu;
+		
+		public BigObserv() {
+			portToDB = new MiniObserv();
+			portToSecu = new MiniObserv();
+		}
+		
+		public Observable getDB() {
+			return (Observable)portToDB;
+		}
+		
+		public Observable getSecu() {
+			return (Observable)portToSecu;
+		}
+		
+		@Override
+		public void update(Observable o, Object arg) {
+			//Here we treat the value to see were we want to send the query
+			//We choosed to handle 2 cases :
+			// - The Query begins with "GET" then we send it to the Database Manager
+			// - The Query begins with "SET" then we send it to the Security Manager
+			//Otherwise, an error is returned
+			switch(((String)arg).split(" ")[0].toUpperCase()) {
+				case "GET":
+					portToDB.setValue((String)arg);
+					break;	
+				case "SET":
+					portToSecu.setValue((String)arg);
+					break;
+				default:
+					serverconfigoutput.setValue((String)arg);
+					break;
+			}
+		}
+	}
+	
+	private class MiniObserv extends Observable{
+		public void setValue(String s) {
+			setChanged();
+			notifyObservers(s);
+		}
+	}
+	
 
 	/**
 	 * <!-- begin-user-doc -->

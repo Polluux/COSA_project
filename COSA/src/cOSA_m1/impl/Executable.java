@@ -61,14 +61,75 @@ public class Executable {
 		rca.init();
 		clientServerConfiguration.eSet(COSA_m1Package.CS_CONF__RPCCLIENTATTACHMENT, new ArrayList<RpcClientAttachment>() {{add(rca);}} );
 		
-		String value = "Meh";
+		
+		ServerImpl server = new ServerImpl();
+		
+		ServerInput sin = new ServerInputImpl();
+		server.eSet(COSA_m1Package.SERVER__SERVERINPUT,sin);
+		
+		ServerOuput sout = new ServerOuputImpl();//Oui j'ai oublié le T !!
+		server.eSet(COSA_m1Package.SERVER__SERVEROUPUT,sout);
+		
+		RpcServerAttachmentImpl rsa = new RpcServerAttachmentImpl();
+		rsa.setFrom(rpc.getServerinrole());
+		rsa.setTo(server.getServerinput());
+		rsa.init();
+		clientServerConfiguration.eSet(COSA_m1Package.CS_CONF__RPCSERVERATTACHMENT,  new ArrayList<RpcServerAttachment>() {{add(rsa);}} );
+		
+		ServerRpcAttachmentImpl sra = new ServerRpcAttachmentImpl();
+		sra.setFrom(server.getServerouput());
+		sra.setTo(rpc.getServeuroutrole());
+		sra.init();
+		clientServerConfiguration.eSet(COSA_m1Package.CS_CONF__SERVERRPCATTACHMENT,  new ArrayList<ServerRpcAttachment>() {{add(sra);}} );
+		
+		
+		ConnectionManagerImpl connectionManager = new ConnectionManagerImpl();
+		connectionManager.setServerconfiginput(new ServerConfigInputImpl());
+		connectionManager.setServerconfigoutput(new ServerConfigOutputImpl());
+		connectionManager.setConnectioninputfromdatabaseport(new ConnectionInputFromDataBasePortImpl());
+		connectionManager.setConnectionouputtodatabaseport(new ConnectionOuputToDataBasePortImpl());
+		connectionManager.setConnectioninputfromsecurityport(new ConnectionInputFromSecurityPortImpl());
+		connectionManager.setConnectionoutputtosecurityport(new ConnectionOutputToSecurityPortImpl());
+		connectionManager.init();
+		server.eSet(COSA_m1Package.SERVER__CONNECTIONMANAGER,connectionManager);
+		
+		OutputBindingImpl out2 = new OutputBindingImpl();
+		out2.setServerconfigoutput(connectionManager.getServerconfigoutput());
+		out2.setServerouput(sout);
+		out2.init();
+		server.eSet(COSA_m1Package.SERVER__OUTPUTBINDING,out2);
+		
+		InputBindingImpl in2 = new InputBindingImpl();
+		in2.setServerconfiginput(connectionManager.getServerconfiginput());
+		in2.setServerinput(sin);
+		in2.init();
+		server.eSet(COSA_m1Package.SERVER__INPUTBINDING,in2);	
+		
+		
+
+		clientServerConfiguration.eSet(COSA_m1Package.CS_CONF__SERVER,server);
+		
+		
+		
+		
+		
+		String value = "SET toto = 1";
 		System.out.println("Je rentre la valeur "+value+" dans ma config.");
 		clientServerConfiguration.getCsqueryports().get(0).setValue(value);
 		System.out.println("La valeur de d'entrée de mon client est : "+clientServerConfiguration.getClients().get(0).getConfiginput().getValue());
-		System.out.println("La valeur de de sortie de mon client est : "+clientServerConfiguration.getClients().get(0).getRequestportrpc().getValue());
+		System.out.println("La valeur de sortie de mon client est : "+clientServerConfiguration.getClients().get(0).getRequestportrpc().getValue());
 		System.out.println("La valeur d'entrée de mon RPC est : "+clientServerConfiguration.getRpcs().get(0).getClientoutrole().getValue());
 		System.out.println("La valeur de sortie de mon RPC est : "+clientServerConfiguration.getRpcs().get(0).getServerinrole().getValue());
-	
+		System.out.println("La valeur d'entrée de mon Server est : "+clientServerConfiguration.getServer().getServerinput().getValue());
+		System.out.println("La valeur d'entrée de mon ConnectionManager est : "+server.getConnectionmanager().getServerconfiginput().getValue());
+		System.out.println("La valeur de sortie de mon ConnectionManager vers DataBaseManager est : "+server.getConnectionmanager().getConnectionouputtodatabaseport().getValue());
+		System.out.println("La valeur de sortie de mon ConnectionManager vers SecurityManager est : "+server.getConnectionmanager().getConnectionoutputtosecurityport().getValue());
+		
+		
+		
+		System.out.println("The output of my configuration is : "+clientServerConfiguration.getCsresponseports().get(0).getValue());
+		
+		
 	}
 
 }
