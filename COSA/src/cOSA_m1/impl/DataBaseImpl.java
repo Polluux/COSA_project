@@ -10,6 +10,11 @@ import cOSA_m1.DatabaseInputFromConnectionPort;
 import cOSA_m1.DatabaseInputFromSecurityPort;
 import cOSA_m1.DatabaseOutputToConnectionPort;
 import cOSA_m1.DatabaseOutputToSecurityPort;
+import cOSA_m1.impl.SecurityManagerImpl.IntermediateObserver;
+
+import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -83,6 +88,55 @@ public class DataBaseImpl extends ComposantImpl implements DataBase {
 	 */
 	protected DataBaseImpl() {
 		super();
+		this.base=new HashMap<String,String>();
+		interm = new IntermediateObserver();
+	}
+	
+	HashMap<String,String> base;
+	
+	
+	public void init() {
+		if(databaseinputfromconnectionport != null && databaseoutputtoconnectionport != null && databaseoutputtosecurityport != null && databaseinputfromsecurityport != null) {
+			databaseinputfromconnectionport.startBeingObservedBy(interm);
+			databaseinputfromsecurityport.startBeingObservedBy(interm);
+			interm.addObserver(databaseoutputtoconnectionport);
+			//databaseoutputtosecurityport observe NOTHING because we didn't plan to send query back to Security for now
+		}
+	}
+	
+	IntermediateObserver interm;
+	
+	class IntermediateObserver extends Observable implements Observer{
+		@Override
+		public void update(Observable o, Object arg) {
+			String res = "";
+			String query = (String)arg;
+			String[] parts = query.split(" ");
+			
+			switch(parts[0].toUpperCase()) {
+			case "GET":
+				if(parts.length == 2 && base.containsKey(parts[1])) {
+					res = base.get(parts[1]);
+				}else {
+					res = "The database does not contains the key : "+parts[1];
+				}
+				break;	
+			case "SET":
+				String regex = "SET ([A-Z]|[a-z]|[0-9]|\\_)+ = \".*\"";
+				if(parts.length >= 4 && query.matches(regex)) {
+					base.put(parts[1],query.substring(query.indexOf("\"")+1, query.length()-1));
+					res = "Query success.";
+				}else {
+					res = "The correct use of SET query is :    SET key = \"value\"";
+				}
+				break;
+			default:
+				res = "Unknown query : "+query;
+				break;
+			}
+			setChanged();
+			notifyObservers(res);
+		}
 	}
 
 	/**

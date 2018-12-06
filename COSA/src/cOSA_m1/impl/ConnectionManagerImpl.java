@@ -158,7 +158,7 @@ public class ConnectionManagerImpl extends ComposantImpl implements ConnectionMa
 					portToSecu.setValue((String)arg);
 					break;
 				default:
-					serverconfigoutput.setValue((String)arg);
+					serverconfigoutput.setValue("Unknown query : "+(String)arg);
 					break;
 			}
 		}

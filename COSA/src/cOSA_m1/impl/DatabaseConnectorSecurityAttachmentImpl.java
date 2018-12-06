@@ -59,6 +59,12 @@ public class DatabaseConnectorSecurityAttachmentImpl extends AComposantConnecteu
 	protected DatabaseConnectorSecurityAttachmentImpl() {
 		super();
 	}
+	
+	public void init() {
+		if(from != null && to != null) {
+			from.startBeingObservedBy(to);
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

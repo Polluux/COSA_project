@@ -59,6 +59,12 @@ public class ConnectionConnectorDatabaseAttachmentImpl extends AComposantConnect
 	protected ConnectionConnectorDatabaseAttachmentImpl() {
 		super();
 	}
+	
+	public void init() {
+		if(from != null && to != null) {
+			from.startBeingObservedBy(to);
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

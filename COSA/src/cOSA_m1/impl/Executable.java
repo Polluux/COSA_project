@@ -200,19 +200,68 @@ public class Executable {
 		database.init();
 		server.eSet(COSA_m1Package.SERVER__DATABASE, database);
 		
+		ConnectorSecurityDatabaseAttachmentImpl csda = new ConnectorSecurityDatabaseAttachmentImpl();
+		csda.setFrom(conDbSec.getDecuritydatabaseoutrole());
+		csda.setTo(database.getDatabaseinputfromsecurityport());
+		csda.init();
+		server.eSet(COSA_m1Package.SERVER__CONNECTORSECURITYDATABASEATTACHMENT, csda);
 		
+		DatabaseConnectorSecurityAttachmentImpl dcsa = new DatabaseConnectorSecurityAttachmentImpl();
+		dcsa.setFrom(database.getDatabaseoutputtosecurityport());
+		dcsa.setTo(conDbSec.getDatabasesecurityinrole());
+		dcsa.init();
+		server.eSet(COSA_m1Package.SERVER__DATABASECONNECTORSECURITYATTACHMENT, dcsa);
 		
+		ConnectionDatabaseConnectorImpl conDatCon = new ConnectionDatabaseConnectorImpl();
+		conDatCon.setConnectiondbinrole(new ConnectionDBInRoleImpl());
+		conDatCon.setConnectiondboutrole(new ConnectionDBOutRoleImpl());
+		conDatCon.setDbconnectioninrole(new DBConnectionInRoleImpl());
+		conDatCon.setDbconnectionoutrole(new DBConnectionOutRoleImpl());
+		conDatCon.setCDConnectorGlue(new CDConnectorGlueImpl());
+		conDatCon.getCDCnnectorGlue().setConnectionoutput(conDatCon.getConnectiondbinrole());
+		conDatCon.getCDCnnectorGlue().setConnectioninput(conDatCon.getDbconnectionoutrole());
+		conDatCon.getCDCnnectorGlue().setDatabaseoutput(conDatCon.dbconnectioninrole);
+		conDatCon.getCDCnnectorGlue().setDatabaseinput(conDatCon.getConnectiondboutrole());
+		conDatCon.init();
+		server.eSet(COSA_m1Package.SERVER__CONNECTIONDATABASECONNECTOR, conDatCon);
 		
+		ConnectorConnectionDatabaseAttachmentImpl ccda = new ConnectorConnectionDatabaseAttachmentImpl();
+		ccda.setFrom(conDatCon.getConnectiondboutrole());
+		ccda.setTo(database.getDatabaseinputfromconnectionport());
+		ccda.init();
+		server.eSet(COSA_m1Package.SERVER__CONNECTORCONNECTIONDATABASEATTACHMENT , ccda);
+		
+		DatabaseConnectorConnectionAttachmentImpl dcca = new DatabaseConnectorConnectionAttachmentImpl();
+		dcca.setFrom(database.getDatabaseoutputtoconnectionport());
+		dcca.setTo(conDatCon.getDbconnectioninrole());
+		dcca.init();
+		server.eSet(COSA_m1Package.SERVER__DATABASECONNECTORCONNECTIONATTACHMENT , dcca);
+		
+		ConnectionConnectorDatabaseAttachmentImpl ccda2 = new ConnectionConnectorDatabaseAttachmentImpl();
+		ccda2.setFrom(connectionManager.getConnectionouputtodatabaseport());
+		ccda2.setTo(conDatCon.getConnectiondbinrole());
+		ccda2.init();
+		server.eSet(COSA_m1Package.SERVER__CONNECTIONCONNECTORDATABASEATTACHMENT , ccda2);
+		
+		ConnectorDatabaseConnectionAttachmentImpl cdca = new ConnectorDatabaseConnectionAttachmentImpl();
+		cdca.setFrom(conDatCon.getDbconnectionoutrole());
+		cdca.setTo(connectionManager.getConnectioninputfromdatabaseport());
+		cdca.init();
+		server.eSet(COSA_m1Package.SERVER__CONNECTORDATABASECONNECTIONATTACHMENT , cdca);
 
 		clientServerConfiguration.eSet(COSA_m1Package.CS_CONF__SERVER,server);
 		
 		
+			
+		/*
 		
+		String value = "SET toto = \"1\"";	
 		
+		System.out.println("Pour une raison de lisibilité afin de présenter le contenu des ports, ceux-ci gardent la dernière valeur qu'ils ont reçus");
 		
-		String value = "SET toto = 1";
 		System.out.println("Je rentre la valeur "+value+" dans ma config.");
 		clientServerConfiguration.getCsqueryports().get(0).setValue(value);
+		
 		System.out.println("La valeur de d'entrée de mon client est : "+clientServerConfiguration.getClients().get(0).getConfiginput().getValue());
 		System.out.println("La valeur de sortie de mon client est : "+clientServerConfiguration.getClients().get(0).getRequestportrpc().getValue());
 		System.out.println("La valeur d'entrée de mon RPC est : "+clientServerConfiguration.getRpcs().get(0).getClientoutrole().getValue());
@@ -227,11 +276,36 @@ public class Executable {
 		System.out.println("La valeur de sortie de mon Security Manager est : "+securityManager.getSecurityoutputtodatabaseport().getValue());
 		System.out.println("La valeur d'entrée de mon Security to Database Connector est : "+server.getDatabasesecurityconnector().getSecuritydatabaseinrole().getValue());
 		System.out.println("La valeur de sortie de mon Security to Database Connector est : "+server.getDatabasesecurityconnector().getDecuritydatabaseoutrole().getValue());
-		
-		
+		System.out.println("La valeur d'entrée de mon DataBase Manager est : "+server.getDatabase().getDatabaseinputfromsecurityport().getValue());
+		System.out.println("La valeur de sortie de mon Database Manager est : "+server.getDatabase().getDatabaseoutputtoconnectionport().getValue());
+		System.out.println("La valeur d'entrée de mon Database to Connection Connector est : "+server.getConnectiondatabaseconnector().getDbconnectioninrole().getValue());
+		System.out.println("La valeur de sortie de mon Database to Connection Connector est : "+server.getConnectiondatabaseconnector().getDbconnectionoutrole().getValue());
+		System.out.println("La valeur d'entrée de mon ConnectionManager est : "+server.getConnectionmanager().getConnectioninputfromdatabaseport().getValue());
+		System.out.println("La valeur d'entrée de mon ConnectionManager depuis Security est : "+server.getConnectionmanager().getConnectioninputfromsecurityport().getValue());
+		System.out.println("La valeur de sortie de mon ConnectionManager vers Security est : "+server.getConnectionmanager().getConnectionoutputtosecurityport().getValue());
+		System.out.println("La valeur de sortie de mon ConnectionManager vers Server est : "+server.getConnectionmanager().getServerconfigoutput().getValue());
+		System.out.println("La valeur de sortie de mon Server est : "+clientServerConfiguration.getServer().getServerouput().getValue());
+		System.out.println("La valeur d'entrée de mon RPC est : "+clientServerConfiguration.getRpcs().get(0).getServeuroutrole().getValue());
+		System.out.println("La valeur de sortie de mon RPC est : "+clientServerConfiguration.getRpcs().get(0).getClientinrole().getValue());
+		System.out.println("La valeur d'entrée de mon Client est : "+clientServerConfiguration.getClients().get(0).getResponseportrpc().getValue());
+		System.out.println("La valeur de sortie de mon Client est : "+clientServerConfiguration.getClients().get(0).getConfigoutput().getValue());
 		
 		System.out.println("The output of my configuration is : "+clientServerConfiguration.getCsresponseports().get(0).getValue());
 		
+		*/
+		
+		ArrayList<String> queries = new ArrayList<String>() {{
+			add("Coucou");
+			add("SET toto = \"1\"");
+			add("GET coucou");
+			add("GET toto");
+		}};
+		
+		for(String q : queries) {
+			System.out.println("VALUE : "+q);
+			clientServerConfiguration.getCsqueryports().get(0).setValue(q);
+			System.out.println("OUPUT : "+clientServerConfiguration.getCsresponseports().get(0).getValue()+"\n");
+		}
 		
 	}
 

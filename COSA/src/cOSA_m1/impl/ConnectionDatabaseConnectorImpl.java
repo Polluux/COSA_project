@@ -83,6 +83,16 @@ public class ConnectionDatabaseConnectorImpl extends ConnecteurImpl implements C
 		return cdConnectorGlue;
 	}
 	
+	@Override
+	public void init() {
+		if(connectiondbinrole != null && connectiondboutrole != null) {
+			connectiondbinrole.startBeingObservedBy(connectiondboutrole, cdConnectorGlue, 0);
+		}
+		if(dbconnectioninrole != null && dbconnectionoutrole != null) {
+			dbconnectioninrole.startBeingObservedBy(dbconnectionoutrole, cdConnectorGlue, 1);
+		}
+	}
+	
 	public void setCDConnectorGlue(CDConnectorGlue newGlue) {
 		cdConnectorGlue = newGlue;
 	}
