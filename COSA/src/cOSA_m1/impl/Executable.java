@@ -220,7 +220,7 @@ public class Executable {
 		conDatCon.setCDConnectorGlue(new CDConnectorGlueImpl());
 		conDatCon.getCDCnnectorGlue().setConnectionoutput(conDatCon.getConnectiondbinrole());
 		conDatCon.getCDCnnectorGlue().setConnectioninput(conDatCon.getDbconnectionoutrole());
-		conDatCon.getCDCnnectorGlue().setDatabaseoutput(conDatCon.dbconnectioninrole);
+		conDatCon.getCDCnnectorGlue().setDatabaseoutput(conDatCon.getDbconnectioninrole());
 		conDatCon.getCDCnnectorGlue().setDatabaseinput(conDatCon.getConnectiondboutrole());
 		conDatCon.init();
 		server.eSet(COSA_m1Package.SERVER__CONNECTIONDATABASECONNECTOR, conDatCon);
